@@ -15,6 +15,14 @@ redirect_german = """
 <link rel="canonical" href="https://docs.virtualassist.smt.asmpt.com/de/replace_me/">
 """
 
+redirect_english = """
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Redirecting to https://docs.virtualassist.smt.asmpt.com/en/replace_me/</title>
+<meta http-equiv="refresh" content="0; URL=https://docs.virtualassist.smt.asmpt.com/en/replace_me/">
+<link rel="canonical" href="https://docs.virtualassist.smt.asmpt.com/en/replace_me/">
+"""
+
 if __name__ == "__main__":
     # Get all .md files from a specirfic directory
     files = glob.glob("../docs/**/*.md", recursive=True)    
@@ -38,15 +46,24 @@ if __name__ == "__main__":
 
         # now create the german version
         german_path = os.path.join(".", "de", file)
-        print(german_path)
+        # print(german_path)
         # recursively create the directory
         os.makedirs(german_path, exist_ok=True)
         # Create index.html file in the directory
-        print(redirect_german.replace("replace_me", german_path))
+        # print(redirect_german.replace("replace_me", german_path))
 
         f = open(os.path.join(german_path, "index.html"), "w")
         # Write the redirect code to the file
         f.write(redirect_german.replace("replace_me", file))
         f.close()
 
-        
+        # create the english version
+        english_path = os.path.join(".", "en", file)
+        os.makedirs(english_path, exist_ok=True)
+        # Create index.html file in the directory
+        # print(redirect_english.replace("replace_me", english_path))
+
+        f = open(os.path.join(english_path, "index.html"), "w")
+        # Write the redirect code to the file
+        f.write(redirect_english.replace("replace_me", file))
+        f.close()
